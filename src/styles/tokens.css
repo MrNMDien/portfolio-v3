@@ -1,0 +1,131 @@
+/* ============================================================================
+   TOKENS — "The Performance Issue"
+   Single source of truth. Nothing below this file may invent a raw colour.
+   ========================================================================= */
+
+:root {
+  /* --- Ink & paper -------------------------------------------------------
+     Verified contrast (WCAG 2.1, computed not estimated):
+       ink        on paper       16.13:1
+       ink        on paper-deep  14.53:1
+       ink-soft   on paper        5.28:1   (AA body)
+       ink-soft   on paper-deep   4.76:1   (AA body)
+       gold-deep  on paper        5.73:1   (AA body)
+       gold-deep  on paper-deep   5.16:1   (AA body)
+       gold       on paper        3.22:1   (AA large text only, >=24px)
+       gold       on paper-deep   2.90:1   (FAILS even large — decoration only)
+       gold       on ink          5.00:1   (AA body, safe everywhere)
+       paper      on ink         16.13:1
+  --------------------------------------------------------------------- */
+  --paper: #f7f3ea;
+  --paper-deep: #efe7d7;
+  --ink: #1a1713;
+  --ink-soft: #6b6459;
+  --gold: #a98136;
+  --gold-deep: #7a5a1e;
+  --line: rgba(26, 23, 19, 0.16);
+  --line-strong: rgba(26, 23, 19, 0.34);
+
+  /* Semantic surface tokens. Each spread re-points these, so components stay
+     surface-agnostic and never hardcode a colour per section. */
+  --surface: var(--paper);
+  --on-surface: var(--ink);
+  --on-surface-soft: var(--ink-soft);
+  --rule: var(--line);
+
+  /* Gold has to resolve differently per surface to hold AA. This is the one
+     token that makes the gold "foil" safe on every ground we print on. */
+  --gold-text: var(--gold-deep); /* small text / labels */
+  --gold-display: var(--gold); /* >=24px display & decoration */
+  --focus: var(--gold-deep);
+
+  /* --- Geometry ---------------------------------------------------------- */
+  --radius: 0; /* absolute square — this is a printed sheet */
+  --trim: 1560px; /* page trim width */
+  --measure: 68ch; /* body measure, 65–75ch */
+  --hair: 1px;
+  --rule-gap: 3px; /* distance between the two hairlines of a double rule */
+
+  --margin: clamp(1.25rem, 5vw, 5.5rem); /* page margin */
+  --chrome-top: 2.375rem; /* running-head bar height */
+
+  /* --- Type -------------------------------------------------------------- */
+  --font-display: 'Fraunces', 'Playfair Display', 'Lora', 'Iowan Old Style',
+    'Times New Roman', serif;
+  --font-body: 'Be Vietnam Pro', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'Cascadia Mono', 'Courier New',
+    monospace;
+
+  /* 12px is the accessibility floor for the smallest running text; print would
+     go smaller, the screen may not. Tracking carries the "fine print" instead. */
+  --fs-micro: 0.75rem; /* 12px */
+  --fs-caption: 0.8125rem; /* 13px */
+  --fs-body: clamp(1rem, 0.965rem + 0.16vw, 1.0938rem);
+  --fs-lede: clamp(1.0625rem, 1.01rem + 0.26vw, 1.1875rem);
+  --fs-crosshead: clamp(1.0625rem, 0.99rem + 0.36vw, 1.3125rem);
+  --fs-h2: clamp(1.375rem, 1.15rem + 1.05vw, 2.125rem);
+  --fs-h1: clamp(2rem, 1.2rem + 3.6vw, 4.5rem);
+  --fs-display: clamp(2.8rem, 1.1rem + 7.6vw, 7.5rem);
+  --fs-numeral: clamp(3.75rem, 1.4rem + 10.4vw, 10.5rem);
+  --fs-quote: clamp(1.6rem, 0.85rem + 3.2vw, 3.4rem);
+
+  /* Measured, not guessed: at 1.08 the Ề of "MINH ĐIỀN" clears the baseline of
+     "NGUYỄN" by only 2.8px. 1.12 roughly doubles that and still reads tight. */
+  --lh-tight: 1.12;
+  --lh-display: 1.06;
+  --lh-head: 1.1;
+  --lh-body: 1.7;
+
+  --track-caps: 0.16em; /* small-caps / mono labels */
+  --track-caps-wide: 0.28em;
+  --track-display: -0.022em; /* never past -0.04em */
+
+  /* --- Space (4px base, print-generous) ---------------------------------- */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.5rem;
+  --s-6: 2rem;
+  --s-7: 2.75rem;
+  --s-8: 3.5rem;
+  --s-9: 5rem;
+  --s-10: 7rem;
+  --spread-y: clamp(4.5rem, 9vh, 8.5rem);
+
+  /* --- Motion (declared here for Phase 2; Phase 1 uses only the fast tier) */
+  --dur-micro: 0.18s;
+  --dur-fast: 0.28s;
+  --dur-slow: 0.8s;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* --- Layers ------------------------------------------------------------ */
+  --z-plate: 1;
+  --z-chrome: 30;
+  --z-menu: 40;
+  --z-grain: 60;
+}
+
+/* Surface inversions. Declared once, here, so a spread only picks a class. */
+.surface-deep {
+  --surface: var(--paper-deep);
+  --on-surface: var(--ink);
+  --on-surface-soft: var(--ink-soft);
+  /* gold fails AA on paper-deep at every size, so display gold steps down too */
+  --gold-display: var(--gold-deep);
+  --gold-text: var(--gold-deep);
+}
+
+.surface-ink {
+  --surface: var(--ink);
+  --on-surface: var(--paper);
+  --on-surface-soft: rgba(247, 243, 234, 0.68);
+  --rule: rgba(247, 243, 234, 0.22);
+  --line: rgba(247, 243, 234, 0.22);
+  --line-strong: rgba(247, 243, 234, 0.4);
+  /* gold on ink is 5.00:1 — safe at any size */
+  --gold-text: var(--gold);
+  --gold-display: var(--gold);
+  --focus: var(--gold);
+}

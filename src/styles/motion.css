@@ -1,0 +1,274 @@
+/* ============================================================================
+   MOTION — the stylesheet half of Phase 2.
+   Three jobs only:
+     1. the pre-paint gate (.motion-pending) so the boot never flashes the
+        finished cover before it types itself in;
+     2. the parts of the motion vocabulary CSS owns outright (caret, cursor,
+        the Playbook hover wash, the foil sweep, the print-head hairline);
+     3. an EXTENSION of the reduced-motion block in base.css — never a repeat.
+   No colour, type or layout decision is made here that is not a motion state.
+   ========================================================================= */
+
+/* ==========================================================================
+   1. PRE-PAINT GATE
+   The inline head script adds .motion-pending and arms a 3.2s failsafe that
+   drops it again. src/animations/index.js clears the timer, sets the same
+   states with GSAP, then removes the class. If the module never runs — JS off,
+   network error, a throw — the failsafe fires and the static issue stands.
+   ======================================================================== */
+.motion-pending [data-ink-reveal],
+.motion-pending [data-type],
+.motion-pending .cover__mastno,
+.motion-pending .coverline,
+.motion-pending .cover__footrow > *,
+.motion-pending .step__num {
+  opacity: 0;
+}
+
+.motion-pending .rule__line {
+  transform: scaleX(0);
+}
+
+/* ==========================================================================
+   2a. TYPEWRITER CARET — thin, even, no theatrics
+   ======================================================================== */
+.is-typing::after {
+  content: '';
+  display: inline-block;
+  width: 1px;
+  height: 0.95em;
+  margin-left: 0.14em;
+  vertical-align: -0.14em;
+  background: currentColor;
+  opacity: 0.75;
+  animation: caret-blink 0.9s steps(1, end) infinite;
+}
+
+@keyframes caret-blink {
+  0%,
+  49% {
+    opacity: 0.75;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* ==========================================================================
+   2b. PRINT-HEAD HAIRLINE
+   One gold hairline crosses the screen in 140ms when the cover finishes —
+   the press finishing its pass. Built and removed by cover.js.
+   ======================================================================== */
+.printhead {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 100svh;
+  z-index: 70;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--gold) 12%,
+    var(--gold) 88%,
+    transparent
+  );
+  will-change: transform;
+}
+
+/* ==========================================================================
+   2c. PLAYBOOK — the hover wash (MOTION.md §5)
+   Deep paper floods the row from the left; the roman numeral steps aside.
+   ======================================================================== */
+.step {
+  position: relative;
+}
+.step::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: var(--paper-deep);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--dur-fast) var(--ease-out);
+  pointer-events: none;
+}
+.step > * {
+  position: relative;
+  z-index: 1;
+}
+.step:hover::before,
+.step:focus-within::before {
+  transform: scaleX(1);
+}
+.step__num {
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+.step:hover .step__num,
+.step:focus-within .step__num {
+  transform: translateX(4px);
+}
+
+/* ==========================================================================
+   2c-2. DROP CAP (MOTION.md §2)
+   The cap soaks into gold with the paragraph. Colour only: ::first-letter
+   ignores transform, and font-size is off limits (it is what initial-letter
+   and the Firefox float fallback both size from).
+   ======================================================================== */
+.story__lede.dropcap-pale::first-letter {
+  /* --gold, not yet soaked in */
+  color: rgba(169, 129, 54, 0.22);
+}
+.story__lede.dropcap-inking::first-letter {
+  transition: color 0.9s var(--ease-out);
+}
+
+/* ==========================================================================
+   2d. FOIL SWEEP (MOTION.md §10) — one pass, never a loop.
+   The gradient is written inline by foil.js from the element's own resting
+   colour, so this only owns the mechanism and the travelling position.
+   ======================================================================== */
+.is-foiling {
+  background-repeat: no-repeat;
+  background-size: 260% 100%;
+  background-position: calc(var(--foil-x, 108) * 1%) 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Back cover: the underline thickens under the pointer (MOTION.md §9).
+   The thickening is a scaleY on the painted layer inside a box that never
+   changes size — see .email__rule in sections.css for the 1px reflow this
+   replaces. The outer element keeps its own transform for backcover.js's
+   left-to-right draw; the two compose. */
+.email__rule::after {
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+.email:hover .email__rule::after,
+.email:focus-visible .email__rule::after {
+  transform: scaleY(1);
+}
+
+/* ==========================================================================
+   2e. CHANNELS — the stacked state (MOTION.md §6)
+   Added by channels.js at >=1024px only, and removed on the way back down, so
+   the static layout is untouched without JS and on small screens.
+   ======================================================================== */
+/* The card is a sheet, not a slide: it needs enough height to read as a page
+   being lifted, and no more. The ink on the tallest of the four measures 256px
+   at 1280 (140px of type, a 20px folio, 96px of padding); min(76svh, 48rem)
+   gave it a 608px box and 352px of nothing. 62svh holds the sheet proportion
+   without the dead field, and still leaves every card taller than the card it
+   covers, so the stack never shows paper between sheets. */
+.stack.is-stacked .stack__card {
+  position: sticky;
+  top: var(--chrome-top);
+  align-self: start;
+  min-height: min(62svh, 40rem);
+  will-change: transform;
+}
+
+/* ==========================================================================
+   2e-2. FIGURES — transform boxes for the parts that grow (MOTION.md §7)
+   Phase 1 already set these on .fig-bar; the wipe area and the live dot need
+   the same treatment. Resting transform is identity, so nothing static moves.
+   ======================================================================== */
+.fig-fill {
+  transform-box: fill-box;
+  transform-origin: left center;
+}
+.fig-live {
+  transform-box: fill-box;
+  transform-origin: center center;
+}
+
+/* ==========================================================================
+   2f. CURSOR "ĐỌC" (MOTION.md §11) — fine pointers only, never on touch.
+   ======================================================================== */
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 70;
+  pointer-events: none;
+  opacity: 0;
+  will-change: transform;
+  color: var(--ink);
+}
+.cursor.is-ink {
+  color: var(--paper);
+}
+.cursor__dot {
+  position: absolute;
+  left: -3px;
+  top: -3px;
+  width: 6px;
+  height: 6px;
+  background: currentColor;
+}
+.cursor__ring {
+  position: absolute;
+  left: -18px;
+  top: -18px;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  opacity: 0;
+}
+.cursor__word {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: currentColor;
+}
+
+/* The dot replaces the arrow only once the real cursor is running. */
+html.has-cursor,
+html.has-cursor body,
+html.has-cursor a,
+html.has-cursor summary,
+html.has-cursor button {
+  cursor: none;
+}
+
+/* ==========================================================================
+   3. REDUCED MOTION — extends the block in base.css, does not repeat it.
+   No custom cursor, no foil, no wash travel, no caret, no stacking.
+   ======================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .is-typing::after {
+    display: none;
+  }
+  .cursor,
+  .printhead {
+    display: none;
+  }
+  html.has-cursor,
+  html.has-cursor body,
+  html.has-cursor a,
+  html.has-cursor summary,
+  html.has-cursor button {
+    cursor: auto;
+  }
+  .step::before {
+    transition: none;
+  }
+  .stack.is-stacked .stack__card {
+    position: static;
+    min-height: 0;
+  }
+  .is-foiling {
+    background-image: none !important;
+    -webkit-text-fill-color: currentColor;
+  }
+}

@@ -1,0 +1,546 @@
+/* ============================================================================
+   BASE — reset, typography, and the printer's apparatus
+   (double rules, corner marks, folios, running heads, grain, plates)
+   ========================================================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  /* No `scroll-behavior: smooth`: Lenis owns anchor travel (1.2s power3.inOut)
+     and the two fight each other. Without JS the jump is instant, which is the
+     correct fallback. */
+  /* the running head parks here when a link is followed */
+  scroll-padding-top: calc(var(--chrome-top) + 1rem);
+}
+
+body {
+  min-height: 100svh;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  font-weight: 400;
+  font-synthesis-weight: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  /* `clip` (not `hidden`) — it contains overflow without breaking position:sticky */
+  overflow-x: clip;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* --- Browser surfaces we did not draw, but still own --------------------- */
+::selection {
+  background: rgba(169, 129, 54, 0.26);
+  color: var(--ink);
+}
+
+:root {
+  caret-color: var(--gold-deep);
+  accent-color: var(--gold-deep);
+  scrollbar-color: var(--ink-soft) var(--paper-deep);
+  scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+  width: 11px;
+  height: 11px;
+}
+::-webkit-scrollbar-track {
+  background: var(--paper-deep);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--ink-soft);
+  border: 3px solid var(--paper-deep);
+  border-radius: 0;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* --- Typographic roles ---------------------------------------------------- */
+.display,
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-optical-sizing: auto;
+  letter-spacing: var(--track-display);
+  line-height: var(--lh-head);
+  text-wrap: balance;
+}
+
+/* Fraunces italic is the soul of the magazine voice. */
+.it {
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* --- Roman/italic face pair ----------------------------------------------
+   A line that leans into italic on hover, without the line changing shape.
+   Both faces are set at load: the roman one holds the box, the italic one is
+   laid over it, and hover only cross-fades opacity.
+   Measured, not assumed — this exists because flipping `font-style` live
+   re-cut the type. Fraunces italic runs 6.4–10.6px narrower than roman on the
+   contents rows and 6.8–12.0px narrower on the cover lines, and on a contents
+   row the leader dots, being the flexible track, absorbed the whole difference
+   and re-tiled every dot. Opacity is a compositor property; font-style is a
+   layout one, and is not animatable besides.
+   Requires a positioned parent (.toc__name, .coverline__text).
+   ---------------------------------------------------------------------- */
+.face {
+  display: block;
+  transition: opacity var(--dur-micro) var(--ease-out);
+}
+.face--it {
+  position: absolute;
+  inset: 0;
+  font-style: italic;
+  opacity: 0;
+  /* aria-hidden in the markup keeps it out of the accessible name; these keep
+     it out of the pointer's way and out of a copied selection. */
+  pointer-events: none;
+  user-select: none;
+}
+.gold {
+  color: var(--gold-display);
+}
+
+/* Mono meta: folios, captions, running heads, figure labels. */
+.meta {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 400;
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  line-height: 1.4;
+  font-variant-numeric: tabular-nums;
+  color: var(--on-surface-soft);
+}
+
+.meta--wide {
+  letter-spacing: var(--track-caps-wide);
+}
+
+/* Kicker: the one eyebrow in the whole issue, and it is a real magazine slug. */
+.kicker {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 500;
+  letter-spacing: var(--track-caps-wide);
+  text-transform: uppercase;
+  color: var(--gold-text);
+}
+
+p {
+  max-width: var(--measure);
+  hyphens: manual;
+}
+
+a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+  text-decoration-color: var(--line-strong);
+  transition: color var(--dur-fast) var(--ease-out),
+    text-decoration-color var(--dur-fast) var(--ease-out);
+}
+a:hover {
+  color: var(--gold-text);
+  text-decoration-color: var(--gold);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Skip link, set as a printed tab. */
+.skip {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  transform: translateY(-120%);
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.75rem 1.25rem;
+}
+.skip:focus-visible {
+  transform: translateY(0);
+  outline-offset: -4px;
+}
+
+/* ==========================================================================
+   THE APPARATUS
+   ======================================================================== */
+
+/* --- Double rule ---------------------------------------------------------
+   Two hairlines, 3px apart. Each line is its own element so Phase 2 can draw
+   them with a 60ms offset (MOTION.md §2) rather than scaling one box.
+   ---------------------------------------------------------------------- */
+.rule {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: calc(var(--hair) * 2 + var(--rule-gap));
+  flex: none;
+}
+.rule__line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: var(--hair);
+  background: var(--rule);
+  transform-origin: left center;
+}
+.rule__line:nth-child(1) {
+  top: 0;
+}
+.rule__line:nth-child(2) {
+  top: calc(var(--hair) + var(--rule-gap));
+}
+
+.rule--gold .rule__line {
+  background: var(--gold);
+}
+.rule--gold .rule__line:nth-child(2) {
+  opacity: 0.5;
+}
+.rule--short {
+  width: clamp(3rem, 7vw, 5.5rem);
+}
+
+/* --- Corner marks ---------------------------------------------------------
+   Registration brackets on the four corners of a plate. Four separate strokes
+   so Phase 2 can draw them one at a time (MOTION.md §7).
+   ---------------------------------------------------------------------- */
+.marks {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.marks__c {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: 0 solid var(--gold);
+}
+.marks__c:nth-child(1) {
+  top: -5px;
+  left: -5px;
+  border-top-width: 1px;
+  border-left-width: 1px;
+}
+.marks__c:nth-child(2) {
+  top: -5px;
+  right: -5px;
+  border-top-width: 1px;
+  border-right-width: 1px;
+}
+.marks__c:nth-child(3) {
+  bottom: -5px;
+  left: -5px;
+  border-bottom-width: 1px;
+  border-left-width: 1px;
+}
+.marks__c:nth-child(4) {
+  bottom: -5px;
+  right: -5px;
+  border-bottom-width: 1px;
+  border-right-width: 1px;
+}
+
+/* --- Plate: a framed image area with a caption ---------------------------- */
+.plate {
+  position: relative;
+  background: var(--ink);
+  overflow: hidden;
+  z-index: var(--z-plate);
+}
+.plate__inner {
+  position: absolute;
+  inset: -6% 0;
+  display: grid;
+  place-items: center;
+  will-change: transform;
+}
+.caption {
+  margin-top: var(--s-3);
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--on-surface-soft);
+}
+
+/* --- The blank waiting for a real number ---------------------------------
+   A ruled fill-in space, the way a printed form leaves room for a figure.
+   Never renders the word TODO; the source comment carries that.
+   ---------------------------------------------------------------------- */
+.tbd {
+  display: inline-block;
+  position: relative;
+  min-width: 2.75ch;
+  border-bottom: 1px solid var(--gold);
+  vertical-align: baseline;
+}
+.tbd::before {
+  content: '\00a0';
+}
+.tbd--wide {
+  min-width: 8ch;
+}
+
+/* ==========================================================================
+   PAGE CHROME — running head, folio, menu
+   ======================================================================== */
+
+/* Running head: one per spread, sticky. As the next spread arrives its own
+   head pushes this one out, so the section name is always correct with no
+   scroll-spy — and it inverts for free on the ink spread. */
+.runhead {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-chrome);
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-4);
+  height: var(--chrome-top);
+  padding: 0.85rem var(--margin) 0;
+  padding-right: max(var(--margin), 7.5rem);
+  background: var(--surface);
+  border-bottom: 1px solid var(--rule);
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--on-surface-soft);
+}
+.runhead__issue {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.runhead__section {
+  color: var(--on-surface);
+  white-space: nowrap;
+}
+
+/* Folio: the page number, bottom outer corner of the spread. */
+.folio {
+  position: absolute;
+  right: var(--margin);
+  bottom: clamp(1.25rem, 3.5vh, 2.5rem);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: var(--track-caps);
+  font-variant-numeric: tabular-nums;
+  color: var(--on-surface-soft);
+}
+.folio::before {
+  content: '';
+  width: clamp(1.5rem, 4vw, 3rem);
+  height: 1px;
+  background: var(--rule);
+}
+
+/* Menu: a <details> disclosure, so it works with zero JS and stays keyboard
+   operable. main.js only adds Escape-to-close and close-on-navigate. */
+.menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: var(--z-menu);
+}
+.menu__btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: var(--chrome-top);
+  padding: 0 var(--margin) 0 1rem;
+  padding-right: max(1.25rem, calc(var(--margin) * 0.55));
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 500;
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.menu__btn::-webkit-details-marker {
+  display: none;
+}
+/* The button is flush to the right edge of the viewport, so the default +3px
+   focus ring put 5px of itself off screen and the keyboard user saw a
+   three-sided box. Inset it, the same answer the skip link already uses. */
+.menu__btn:focus-visible {
+  outline-offset: -3px;
+}
+.menu__btn:hover {
+  color: var(--gold-deep);
+}
+.menu__btn::after {
+  content: '';
+  width: 15px;
+  height: 5px;
+  border-top: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+}
+.menu[open] .menu__btn::after {
+  height: 1px;
+  border-bottom: 0;
+}
+.menu[open] .menu__btn {
+  color: var(--gold-deep);
+}
+
+/* Freeze the page behind the overlay. `:has` keeps this out of JS. */
+body:has(.menu[open]) {
+  overflow: hidden;
+}
+
+.menu__panel {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: var(--paper);
+  padding: calc(var(--chrome-top) + var(--s-7)) var(--margin) var(--s-7);
+  overflow-y: auto;
+  display: grid;
+  align-content: center;
+}
+
+/* ==========================================================================
+   PAPER — grain and fibre, fixed so it never repaints on scroll
+   ======================================================================== */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-grain);
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.86' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+/* Paper fibre: a few very faint vertical grains, like laid paper held to light. */
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.5;
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(26, 23, 19, 0.05) 0 1px,
+    transparent 1px 37px,
+    rgba(26, 23, 19, 0.03) 37px 38px,
+    transparent 38px 91px
+  );
+}
+
+/* ==========================================================================
+   LAYOUT — the magazine grid
+   ======================================================================== */
+.spread {
+  position: relative;
+  background: var(--surface);
+  color: var(--on-surface);
+}
+.spread__body {
+  padding: var(--spread-y) var(--margin)
+    calc(var(--spread-y) + clamp(1.5rem, 4vh, 3rem));
+  max-width: var(--trim);
+  margin-inline: auto;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: clamp(1.25rem, 2.6vw, 2.75rem);
+  row-gap: var(--s-7);
+}
+
+/* Section opener: double rule + kicker + headline, one rhythm everywhere. */
+.opener {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: var(--s-5);
+}
+.opener__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-4);
+  flex-wrap: wrap;
+}
+.opener h2 {
+  font-size: var(--fs-h1);
+  max-width: 18ch;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    row-gap: var(--s-6);
+  }
+}
+
+/* ==========================================================================
+   REDUCED MOTION
+   ======================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

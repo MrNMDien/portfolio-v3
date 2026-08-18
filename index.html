@@ -1,0 +1,1156 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nguyễn Minh Điền — The Performance Issue, № 01 / 2026</title>
+    <meta
+      name="description"
+      content="Hồ sơ năng lực của Nguyễn Minh Điền, performance marketing leader vận hành ngân sách hơn 15 tỷ mỗi tháng. Số 01, 2026."
+    />
+    <meta name="theme-color" content="#F7F3EA" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <meta property="og:type" content="profile" />
+    <meta
+      property="og:title"
+      content="Nguyễn Minh Điền — The Performance Issue, № 01 / 2026"
+    />
+    <meta
+      property="og:description"
+      content="The man behind 15 billion a month."
+    />
+    <meta property="og:locale" content="vi_VN" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <!--
+      Pre-paint gate for the cover boot (Phase 2). It hides only what the boot
+      is about to print, so the finished cover never flashes before it types
+      itself in. The 3.2s failsafe is the whole safety story: if the module
+      never runs — JS off, network error, a throw — the class drops itself and
+      the static issue stands. src/animations/index.js clears the timer.
+      3.2s, not 2.5s: the boot's own score runs 1.88s, and a font response slow
+      enough to delay module execution must not be able to pull the gate out
+      from under a boot that is running perfectly well.
+    -->
+    <script>
+      (function () {
+        var root = document.documentElement;
+        root.classList.add('motion-pending');
+        window.__motionFailsafe = setTimeout(function () {
+          root.classList.remove('motion-pending');
+        }, 3200);
+      })();
+    </script>
+  </head>
+
+  <body>
+    <!--
+      THESIS: This portfolio is a single issue of a printed business magazine
+      about one man, not a website about a marketer. It refuses the SaaS
+      portfolio scaffold: no hero-metric template, no feature cards, no nav bar.
+      OWN-WORLD: Warm ivory stock (#F7F3EA) and warm ink (#1A1713), gold foil
+      held to ~5% of the surface. Fraunces roman and italic for display,
+      Be Vietnam Pro for text, IBM Plex Mono for the printer's furniture.
+      Square corners everywhere. The component language is a real magazine's:
+      double rules, plate corner marks, folios, running heads, drop caps,
+      leader dots, a colophon.
+      STORY: A CEO opens a cover, reads a contents page, meets the man in a
+      cover story, is convinced by four numbers, and closes on a back cover
+      carrying an email address.
+      FIRST VIEWPORT: Masthead and double rule across the top; the name set as
+      cover type at the left over eight columns; three cover lines with page
+      numbers at the lower right; time in HCMC along the bottom.
+      FORM: Print magazine. Brief-pinned by DIRECTION.md, so no concept roll
+      was run; DIRECTION.md is the direction of record.
+      FINISH: unreviewed and undocumented is unfinished; this build ends with
+      the finish review, the verdict, and DESIGN.md
+    -->
+
+    <a class="skip" href="#main">Tới nội dung chính</a>
+    <div class="grain" aria-hidden="true"></div>
+
+    <details class="menu" id="menu">
+      <summary class="menu__btn" aria-label="Mở mục lục">Menu</summary>
+      <div class="menu__panel">
+        <p class="meta meta--wide menu__eyebrow">The Performance Issue · № 01</p>
+        <nav class="toc toc--menu" aria-label="Mục lục nhanh">
+          <a class="toc__row" href="#cover-story">
+            <span class="toc__no">01</span>
+            <span class="toc__name"
+              ><span class="face">Cover Story</span
+              ><span class="face face--it" aria-hidden="true"
+                >Cover Story</span
+              ></span>
+            <span class="toc__dots" aria-hidden="true"></span>
+            <span class="toc__page">001</span>
+          </a>
+          <a class="toc__row" href="#numbers">
+            <span class="toc__no">02</span>
+            <span class="toc__name"
+              ><span class="face">Numbers</span
+              ><span class="face face--it" aria-hidden="true"
+                >Numbers</span
+              ></span>
+            <span class="toc__dots" aria-hidden="true"></span>
+            <span class="toc__page">002</span>
+          </a>
+          <a class="toc__row" href="#playbook">
+            <span class="toc__no">03</span>
+            <span class="toc__name"
+              ><span class="face">Playbook</span
+              ><span class="face face--it" aria-hidden="true"
+                >Playbook</span
+              ></span>
+            <span class="toc__dots" aria-hidden="true"></span>
+            <span class="toc__page">003</span>
+          </a>
+          <a class="toc__row" href="#channels">
+            <span class="toc__no">04</span>
+            <span class="toc__name"
+              ><span class="face">Channels</span
+              ><span class="face face--it" aria-hidden="true"
+                >Channels</span
+              ></span>
+            <span class="toc__dots" aria-hidden="true"></span>
+            <span class="toc__page">004</span>
+          </a>
+          <a class="toc__row" href="#case-files">
+            <span class="toc__no">05</span>
+            <span class="toc__name"
+              ><span class="face">Case Files</span
+              ><span class="face face--it" aria-hidden="true"
+                >Case Files</span
+              ></span>
+            <span class="toc__dots" aria-hidden="true"></span>
+            <span class="toc__page">005</span>
+          </a>
+          <a class="toc__row" href="#contact">
+            <span class="toc__no">06</span>
+            <span class="toc__name"
+              ><span class="face">Contact</span
+              ><span class="face face--it" aria-hidden="true"
+                >Contact</span
+              ></span>
+            <span class="toc__dots" aria-hidden="true"></span>
+            <span class="toc__page">006</span>
+          </a>
+        </nav>
+      </div>
+    </details>
+
+    <main id="main">
+      <!-- ===================================================================
+           SPREAD 1 — COVER
+           Phase 2 owns the preloader: the masthead types in, the rule draws,
+           the title lines ink-reveal, and `đang in… %` counts in the footer
+           slot marked data-print-progress. Phase 1 renders the finished cover.
+      ==================================================================== -->
+      <section
+        id="cover"
+        class="spread spread--cover"
+        aria-labelledby="cover-title"
+      >
+        <div class="cover__glow" aria-hidden="true"></div>
+
+        <div class="spread__body cover__body">
+          <header class="cover__masthead">
+            <span class="cover__mastname" data-type>THE PERFORMANCE ISSUE</span>
+            <span class="cover__mastno">№ 01 — 2026</span>
+          </header>
+
+          <span class="rule" data-rule-draw aria-hidden="true">
+            <i class="rule__line"></i><i class="rule__line"></i>
+          </span>
+
+          <div class="cover__stage">
+            <div class="cover__titleblock">
+              <h1 class="cover__title" id="cover-title">
+                <span class="cover__line" data-ink-reveal>NGUYỄN</span>
+                <span class="cover__line" data-ink-reveal>MINH ĐIỀN</span>
+              </h1>
+              <p class="cover__coverline it" lang="en" data-ink-reveal>
+                “The man behind 15 billion a month.”
+              </p>
+            </div>
+
+            <aside class="cover__lines" aria-label="Trong số này">
+              <a class="coverline" href="#numbers">
+                <span class="coverline__text"
+                  ><span class="face">Numbers first</span
+                  ><span class="face face--it" aria-hidden="true"
+                    >Numbers first</span
+                  ></span
+                >
+                <span class="coverline__page">002</span>
+              </a>
+              <a class="coverline" href="#channels">
+                <span class="coverline__text"
+                  ><span class="face">Bốn kênh, một quy trình</span
+                  ><span class="face face--it" aria-hidden="true"
+                    >Bốn kênh, một quy trình</span
+                  ></span
+                >
+                <span class="coverline__page">004</span>
+              </a>
+              <a class="coverline" href="#case-files">
+                <span class="coverline__text"
+                  ><span class="face">Ba hồ sơ chiến dịch</span
+                  ><span class="face face--it" aria-hidden="true"
+                    >Ba hồ sơ chiến dịch</span
+                  ></span
+                >
+                <span class="coverline__page">005</span>
+              </a>
+            </aside>
+          </div>
+
+          <footer class="cover__foot">
+            <span class="rule" data-rule-draw aria-hidden="true">
+              <i class="rule__line"></i><i class="rule__line"></i>
+            </span>
+            <div class="cover__footrow">
+              <span class="meta">HCMC — GMT+7</span>
+              <time class="meta cover__clock" id="clock" datetime="00:00"
+                >--:--:--</time
+              >
+              <!-- Phase 2 prints “đang in… {n}%” into this slot during boot. -->
+              <span class="meta cover__status" data-print-progress
+                >OPEN TO OPPORTUNITIES</span
+              >
+            </div>
+          </footer>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           SPREAD 2 — CONTENTS
+      ==================================================================== -->
+      <section id="contents" class="spread" aria-labelledby="contents-h">
+        <header class="runhead">
+          <span class="runhead__issue">The Performance Issue · № 01</span>
+          <span class="runhead__section">Contents</span>
+        </header>
+
+        <div class="spread__body">
+          <div class="grid">
+            <div class="opener">
+              <span class="rule" data-rule-draw aria-hidden="true">
+                <i class="rule__line"></i><i class="rule__line"></i>
+              </span>
+              <div class="opener__head">
+                <h2 id="contents-h" data-ink-reveal>
+                  Contents<span class="it gold">.</span>
+                </h2>
+                <span class="meta meta--wide">Mục lục — № 01 / 2026</span>
+              </div>
+            </div>
+
+            <nav class="toc toc--page" aria-label="Mục lục">
+              <a class="toc__row" href="#cover-story">
+                <span class="toc__no">01</span>
+                <span class="toc__name"
+                  ><span class="face">Cover Story <span class="toc__vn">Chân dung</span></span
+                  ><span class="face face--it" aria-hidden="true"
+                    >Cover Story <span class="toc__vn">Chân dung</span></span
+                  ></span
+                >
+                <span class="toc__dots" aria-hidden="true"></span>
+                <span class="toc__page">001</span>
+              </a>
+              <a class="toc__row" href="#numbers">
+                <span class="toc__no">02</span>
+                <span class="toc__name"
+                  ><span class="face">Numbers <span class="toc__vn">Con số</span></span
+                  ><span class="face face--it" aria-hidden="true"
+                    >Numbers <span class="toc__vn">Con số</span></span
+                  ></span
+                >
+                <span class="toc__dots" aria-hidden="true"></span>
+                <span class="toc__page">002</span>
+              </a>
+              <a class="toc__row" href="#playbook">
+                <span class="toc__no">03</span>
+                <span class="toc__name"
+                  ><span class="face">Playbook <span class="toc__vn">Quy trình</span></span
+                  ><span class="face face--it" aria-hidden="true"
+                    >Playbook <span class="toc__vn">Quy trình</span></span
+                  ></span
+                >
+                <span class="toc__dots" aria-hidden="true"></span>
+                <span class="toc__page">003</span>
+              </a>
+              <a class="toc__row" href="#channels">
+                <span class="toc__no">04</span>
+                <span class="toc__name"
+                  ><span class="face">Channels <span class="toc__vn">Bốn chuyên mục</span></span
+                  ><span class="face face--it" aria-hidden="true"
+                    >Channels <span class="toc__vn">Bốn chuyên mục</span></span
+                  ></span
+                >
+                <span class="toc__dots" aria-hidden="true"></span>
+                <span class="toc__page">004</span>
+              </a>
+              <a class="toc__row" href="#case-files">
+                <span class="toc__no">05</span>
+                <span class="toc__name"
+                  ><span class="face">Case Files <span class="toc__vn">Ba hồ sơ</span></span
+                  ><span class="face face--it" aria-hidden="true"
+                    >Case Files <span class="toc__vn">Ba hồ sơ</span></span
+                  ></span
+                >
+                <span class="toc__dots" aria-hidden="true"></span>
+                <span class="toc__page">005</span>
+              </a>
+              <a class="toc__row" href="#contact">
+                <span class="toc__no">06</span>
+                <span class="toc__name"
+                  ><span class="face">Contact <span class="toc__vn">Bìa sau</span></span
+                  ><span class="face face--it" aria-hidden="true"
+                    >Contact <span class="toc__vn">Bìa sau</span></span
+                  ></span
+                >
+                <span class="toc__dots" aria-hidden="true"></span>
+                <span class="toc__page">006</span>
+              </a>
+            </nav>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           SPREAD 3 — COVER STORY (001)
+      ==================================================================== -->
+      <section id="cover-story" class="spread" aria-labelledby="story-h">
+        <header class="runhead">
+          <span class="runhead__issue">The Performance Issue · № 01</span>
+          <span class="runhead__section">Cover Story</span>
+        </header>
+
+        <div class="spread__body">
+          <div class="grid story">
+            <div class="story__text">
+              <p class="kicker">Cover Story</p>
+              <h2 class="story__head" id="story-h" lang="en" data-ink-reveal>
+                Young enough to move fast. Trusted with
+                <em class="it gold">15B+</em>.
+              </h2>
+
+              <!-- TODO: xác nhận số năm (hiện đang ghi “Bốn năm”). -->
+              <p class="story__lede">
+                Bốn năm trong performance marketing, tôi đi từ media buyer lên
+                leader — không phải nhờ thâm niên, mà nhờ kết quả đo được. Hiện
+                tôi chịu trách nhiệm toàn bộ hiệu quả quảng cáo với ngân sách
+                hơn 15 tỷ mỗi tháng: lên chiến lược, phân bổ đa kênh, xây hệ
+                thống đo lường và dẫn dắt đội ngũ thực thi.
+              </p>
+
+              <div class="crossheads">
+                <div class="crosshead">
+                  <span class="rule" data-rule-draw aria-hidden="true">
+                    <i class="rule__line"></i><i class="rule__line"></i>
+                  </span>
+                  <h3 class="crosshead__title">Data trước, cảm tính sau</h3>
+                  <p class="crosshead__note">
+                    mọi quyết định ngân sách đều có số chứng minh
+                  </p>
+                </div>
+                <div class="crosshead">
+                  <span class="rule" data-rule-draw aria-hidden="true">
+                    <i class="rule__line"></i><i class="rule__line"></i>
+                  </span>
+                  <h3 class="crosshead__title">Scale có kỷ luật</h3>
+                  <p class="crosshead__note">
+                    tăng ngân sách mà không vỡ hiệu quả
+                  </p>
+                </div>
+                <div class="crosshead">
+                  <span class="rule" data-rule-draw aria-hidden="true">
+                    <i class="rule__line"></i><i class="rule__line"></i>
+                  </span>
+                  <h3 class="crosshead__title">Team gọn, đầu ra lớn</h3>
+                  <!-- TODO: sĩ số đội ngũ (hiện đang ghi “5 người”). -->
+                  <p class="crosshead__note">
+                    5 người vận hành khối lượng của một phòng ban
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- TODO: thay bằng ảnh chân dung thật (3:4, tối thiểu 900×1200). -->
+            <figure class="story__plate">
+              <div class="plate plate--portrait">
+                <div class="plate__inner" data-parallax>
+                  <span class="plate__sig" aria-hidden="true">MĐ</span>
+                  <i class="plate__sigrule" aria-hidden="true"></i>
+                </div>
+                <span class="marks" aria-hidden="true">
+                  <i class="marks__c"></i><i class="marks__c"></i>
+                  <i class="marks__c"></i><i class="marks__c"></i>
+                </span>
+              </div>
+              <figcaption class="caption" data-type>
+                Plate I — Nguyễn Minh Điền, HCMC 2026
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <span class="folio">001</span>
+      </section>
+
+      <!-- ===================================================================
+           SPREAD 4 — NUMBERS (002) — paper-deep
+      ==================================================================== -->
+      <section
+        id="numbers"
+        class="spread surface-deep"
+        aria-labelledby="numbers-h"
+      >
+        <header class="runhead">
+          <span class="runhead__issue">The Performance Issue · № 01</span>
+          <span class="runhead__section">Numbers</span>
+        </header>
+
+        <div class="spread__body">
+          <div class="grid">
+            <div class="opener">
+              <span class="rule" data-rule-draw aria-hidden="true">
+                <i class="rule__line"></i><i class="rule__line"></i>
+              </span>
+              <div class="opener__head">
+                <h2 id="numbers-h" lang="en" data-ink-reveal>
+                  Numbers don’t need <em class="it gold">adjectives</em>.
+                </h2>
+                <span class="meta meta--wide">Bảng số — 002</span>
+              </div>
+            </div>
+
+            <dl class="stats">
+              <dt class="sr-only">Ngân sách quảng cáo đang vận hành</dt>
+              <dd class="stat">
+                <span class="rule" data-rule-draw aria-hidden="true">
+                  <i class="rule__line"></i><i class="rule__line"></i>
+                </span>
+                <div class="stat__row">
+                  <span class="sr-only">Hơn 15 tỷ VND mỗi tháng.</span>
+                  <span class="stat__num" data-odometer aria-hidden="true">
+                    <span class="stat__digits" data-odometer-digits>15</span
+                    ><span class="stat__plus">+</span>
+                  </span>
+                  <span class="stat__unit" aria-hidden="true"
+                    >tỷ VND / tháng</span
+                  >
+                  <span class="stat__note" aria-hidden="true"
+                    >Ngân sách quảng cáo đang vận hành</span
+                  >
+                </div>
+              </dd>
+
+              <!-- TODO: xác nhận tổng chi tiêu 180+ tỷ VND / năm. -->
+              <dt class="sr-only">Tổng chi tiêu chịu trách nhiệm</dt>
+              <dd class="stat">
+                <span class="rule" data-rule-draw aria-hidden="true">
+                  <i class="rule__line"></i><i class="rule__line"></i>
+                </span>
+                <div class="stat__row">
+                  <span class="sr-only">Hơn 180 tỷ VND mỗi năm.</span>
+                  <span class="stat__num" data-odometer aria-hidden="true">
+                    <span class="stat__digits" data-odometer-digits>180</span
+                    ><span class="stat__plus">+</span>
+                  </span>
+                  <span class="stat__unit" aria-hidden="true">tỷ VND / năm</span>
+                  <span class="stat__note" aria-hidden="true"
+                    >Tổng chi tiêu chịu trách nhiệm</span
+                  >
+                </div>
+              </dd>
+
+              <!-- TODO: xác nhận số năm kinh nghiệm. -->
+              <dt class="sr-only">Kinh nghiệm performance marketing</dt>
+              <dd class="stat">
+                <span class="rule" data-rule-draw aria-hidden="true">
+                  <i class="rule__line"></i><i class="rule__line"></i>
+                </span>
+                <div class="stat__row">
+                  <span class="sr-only">4 năm.</span>
+                  <span
+                    class="stat__num"
+                    data-odometer
+                    data-odometer-pad="2"
+                    aria-hidden="true"
+                  >
+                    <span class="stat__digits" data-odometer-digits>04</span>
+                  </span>
+                  <span class="stat__unit" aria-hidden="true">năm</span>
+                  <span class="stat__note" aria-hidden="true"
+                    >Kinh nghiệm performance marketing</span
+                  >
+                </div>
+              </dd>
+
+              <!-- TODO: xác nhận sĩ số đội ngũ trực tiếp dẫn dắt. -->
+              <dt class="sr-only">Đội ngũ trực tiếp dẫn dắt</dt>
+              <dd class="stat">
+                <span class="rule" data-rule-draw aria-hidden="true">
+                  <i class="rule__line"></i><i class="rule__line"></i>
+                </span>
+                <div class="stat__row">
+                  <span class="sr-only">5 thành viên.</span>
+                  <span
+                    class="stat__num"
+                    data-odometer
+                    data-odometer-pad="2"
+                    aria-hidden="true"
+                  >
+                    <span class="stat__digits" data-odometer-digits>05</span>
+                  </span>
+                  <span class="stat__unit" aria-hidden="true">thành viên</span>
+                  <span class="stat__note" aria-hidden="true"
+                    >Đội ngũ trực tiếp dẫn dắt</span
+                  >
+                </div>
+              </dd>
+            </dl>
+
+            <span class="rule stats__close" data-rule-draw aria-hidden="true">
+              <i class="rule__line"></i><i class="rule__line"></i>
+            </span>
+          </div>
+        </div>
+
+        <span class="folio">002</span>
+      </section>
+
+      <!-- ===================================================================
+           SPREAD 5 — PLAYBOOK (003)
+      ==================================================================== -->
+      <section id="playbook" class="spread" aria-labelledby="playbook-h">
+        <header class="runhead">
+          <span class="runhead__issue">The Performance Issue · № 01</span>
+          <span class="runhead__section">Playbook</span>
+        </header>
+
+        <div class="spread__body">
+          <div class="grid">
+            <div class="opener">
+              <span class="rule" data-rule-draw aria-hidden="true">
+                <i class="rule__line"></i><i class="rule__line"></i>
+              </span>
+              <div class="opener__head">
+                <h2 id="playbook-h" lang="en" data-ink-reveal>
+                  Big budgets don’t forgive <em class="it gold">guesswork</em>.
+                </h2>
+                <span class="meta meta--wide">Playbook — 003</span>
+              </div>
+              <p class="playbook__lead">
+                Bốn nguyên tắc áp cho mọi chiến dịch, mọi kênh, mọi quy mô ngân
+                sách.
+              </p>
+            </div>
+
+            <ol class="playbook">
+              <li class="step">
+                <span class="step__num it" aria-hidden="true">I.</span>
+                <div class="step__body">
+                  <h3 class="step__name">Research</h3>
+                  <p class="step__note">
+                    hiểu sản phẩm, khách, đối thủ trước khi tiêu đồng nào
+                  </p>
+                </div>
+              </li>
+              <li class="step">
+                <span class="step__num it" aria-hidden="true">II.</span>
+                <div class="step__body">
+                  <h3 class="step__name">Test</h3>
+                  <p class="step__note">
+                    giả thuyết rõ ràng, ngân sách nhỏ, kết luận bằng số
+                  </p>
+                </div>
+              </li>
+              <li class="step">
+                <span class="step__num it" aria-hidden="true">III.</span>
+                <div class="step__body">
+                  <h3 class="step__name">Scale</h3>
+                  <p class="step__note">
+                    đổ ngân sách vào thứ đã chứng minh, theo quy tắc định sẵn
+                  </p>
+                </div>
+              </li>
+              <li class="step">
+                <span class="step__num it" aria-hidden="true">IV.</span>
+                <div class="step__body">
+                  <h3 class="step__name">Optimize</h3>
+                  <p class="step__note">
+                    cắt cái yếu không thương tiếc, lặp lại mỗi tuần
+                  </p>
+                </div>
+              </li>
+            </ol>
+          </div>
+        </div>
+
+        <span class="folio">003</span>
+      </section>
+
+      <!-- ===================================================================
+           SPREAD 6 — CHANNELS (004)
+           Markup is already the sticky-stack shape: .stack > .stack__card.
+           Phase 1 renders them as a plain vertical run of chapter openers.
+      ==================================================================== -->
+      <section id="channels" class="spread" aria-labelledby="channels-h">
+        <header class="runhead">
+          <span class="runhead__issue">The Performance Issue · № 01</span>
+          <span class="runhead__section">Channels</span>
+        </header>
+
+        <div class="spread__body spread__body--flush">
+          <div class="grid">
+            <div class="opener">
+              <span class="rule" data-rule-draw aria-hidden="true">
+                <i class="rule__line"></i><i class="rule__line"></i>
+              </span>
+              <div class="opener__head">
+                <h2 id="channels-h" data-ink-reveal>
+                  Bốn chuyên mục, <em class="it gold">một</em> quy trình.
+                </h2>
+                <span class="meta meta--wide">Channels — 004</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="stack">
+            <article class="stack__card">
+              <div class="stack__inner">
+                <h3 class="stack__name" data-ink-reveal>Meta<span class="gold">.</span></h3>
+                <div class="stack__col">
+                  <p class="stack__copy">
+                    Full-funnel trên Meta: từ cấu trúc tài khoản, creative
+                    testing đến scale ngân sách lớn mà ROAS không gãy. Kênh tôi
+                    tin nhất và hiểu sâu nhất.
+                  </p>
+                  <!-- TODO: xác nhận tỷ trọng ~70% tổng ngân sách. -->
+                  <p class="stack__metric">~70% tổng ngân sách</p>
+                </div>
+              </div>
+              <span class="stack__folio">004 · I</span>
+            </article>
+
+            <article class="stack__card">
+              <div class="stack__inner">
+                <h3 class="stack__name" data-ink-reveal>TikTok<span class="gold">.</span></h3>
+                <div class="stack__col">
+                  <p class="stack__copy">
+                    Content-performance loop: bắt tín hiệu creative sớm, đẩy
+                    thắng nhanh, cắt lỗ sớm. TikTok thưởng cho tốc độ — và tốc
+                    độ là thứ team tôi có.
+                  </p>
+                  <!-- TODO: xác nhận “×2 tốc độ test creative”. -->
+                  <p class="stack__metric">×2 tốc độ test creative</p>
+                </div>
+              </div>
+              <span class="stack__folio">004 · II</span>
+            </article>
+
+            <article class="stack__card">
+              <div class="stack__inner">
+                <h3 class="stack__name" data-ink-reveal>Data<span class="gold">.</span></h3>
+                <div class="stack__col">
+                  <p class="stack__copy">
+                    Tracking, dashboard, attribution tự xây. Trước khi hỏi “chạy
+                    gì tiếp”, tôi hỏi “số đang nói gì”. Không có dashboard thì
+                    không có cuộc họp.
+                  </p>
+                  <p class="stack__metric">100% chiến dịch có dashboard realtime</p>
+                </div>
+              </div>
+              <span class="stack__folio">004 · III</span>
+            </article>
+
+            <article class="stack__card">
+              <div class="stack__inner">
+                <h3 class="stack__name" data-ink-reveal>Team<span class="gold">.</span></h3>
+                <div class="stack__col">
+                  <p class="stack__copy">
+                    Tuyển, đào tạo và xây quy trình cho team tinh gọn. Mục tiêu:
+                    hệ thống chạy đúng ngay cả khi tôi không ngồi đó.
+                  </p>
+                  <!-- TODO: xác nhận “5 người · 1 quy trình”. -->
+                  <p class="stack__metric">5 người · 1 quy trình</p>
+                </div>
+              </div>
+              <span class="stack__folio">004 · IV</span>
+            </article>
+          </div>
+        </div>
+
+        <span class="folio">004</span>
+      </section>
+
+      <!-- ===================================================================
+           SPREAD 7 — CASE FILES (005)
+           Figures are static and fully drawn in Phase 1. They carry shape and
+           word-labels only; every real number is a ruled blank.
+      ==================================================================== -->
+      <section id="case-files" class="spread" aria-labelledby="cases-h">
+        <header class="runhead">
+          <span class="runhead__issue">The Performance Issue · № 01</span>
+          <span class="runhead__section">Case Files</span>
+        </header>
+
+        <div class="spread__body">
+          <div class="grid">
+            <div class="opener">
+              <span class="rule" data-rule-draw aria-hidden="true">
+                <i class="rule__line"></i><i class="rule__line"></i>
+              </span>
+              <div class="opener__head">
+                <h2 id="cases-h" lang="en" data-ink-reveal>
+                  Campaigns that paid for <em class="it gold">themselves</em>.
+                </h2>
+                <span class="meta meta--wide">Ba hồ sơ — 005</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ---------- CASE FILE Nº 01 ---------- -->
+          <article class="case case--a">
+            <div class="case__text">
+              <p class="case__slug">Case File Nº 01 — Meta — Scale</p>
+              <!-- TODO: toàn bộ số liệu + tên ngành của hồ sơ 01. -->
+              <h3 class="case__title">Scale Meta giữ vững hiệu quả</h3>
+              <dl class="case__body">
+                <dt>Bối cảnh</dt>
+                <dd>
+                  Thương hiệu ngành
+                  <span class="tbd"
+                    ><span class="sr-only">chưa công bố</span></span
+                  >
+                  cần tăng doanh số nhưng sợ vỡ ROAS khi scale.
+                </dd>
+                <dt>Cách làm</dt>
+                <dd>
+                  Tái cấu trúc tài khoản, hệ thống creative testing theo tuần,
+                  quy tắc phân bổ ngân sách theo tín hiệu sớm.
+                </dd>
+                <dt>Kết quả</dt>
+                <dd>
+                  Ngân sách ×<span class="tbd"
+                    ><span class="sr-only">chưa công bố</span></span
+                  >
+                  trong
+                  <span class="tbd"
+                    ><span class="sr-only">chưa công bố</span></span
+                  >
+                  tháng — ROAS giữ
+                  <span class="tbd"
+                    ><span class="sr-only">chưa công bố</span></span
+                  >.
+                </dd>
+              </dl>
+            </div>
+
+            <figure class="case__fig">
+              <div class="plate plate--fig">
+                <svg
+                  class="fig"
+                  data-fig="01"
+                  viewBox="0 0 340 210"
+                  role="img"
+                  aria-labelledby="fig01-t fig01-d"
+                >
+                  <title id="fig01-t">Hình 01</title>
+                  <desc id="fig01-d">
+                    Hai biểu đồ xếp chồng dùng chung trục thời gian T1 đến T6.
+                    Trên: vùng SPEND đi lên đều. Dưới: đường ROAS đi ngang. Đồ
+                    thị chỉ thể hiện hình dạng, chưa gắn số liệu.
+                  </desc>
+
+                  <!-- upper panel: SPEND -->
+                  <path
+                    class="fig-fill"
+                    d="M46 118 C 84 112, 108 104, 150 90 C 194 76, 232 60, 310 40 L310 118 Z"
+                  />
+                  <path
+                    class="fig-draw"
+                    d="M46 118 C 84 112, 108 104, 150 90 C 194 76, 232 60, 310 40"
+                  />
+                  <path class="fig-axis" d="M46 118 H310" />
+                  <text class="fig-label" x="46" y="32">SPEND</text>
+                  <path class="fig-arrow" d="M92 30 l9 -9 M101 21 h-6 M101 21 v6" />
+
+                  <!-- divider between the two panels -->
+                  <path class="fig-hair" d="M46 136 H310" />
+
+                  <!-- lower panel: ROAS -->
+                  <path
+                    class="fig-draw"
+                    d="M46 166 L98 163 L151 167 L204 162 L257 165 L310 163"
+                  />
+                  <g class="fig-dot">
+                    <circle cx="46" cy="166" r="2" />
+                    <circle cx="98" cy="163" r="2" />
+                    <circle cx="151" cy="167" r="2" />
+                    <circle cx="204" cy="162" r="2" />
+                    <circle cx="257" cy="165" r="2" />
+                    <circle cx="310" cy="163" r="2" />
+                  </g>
+                  <text class="fig-label" x="46" y="152">ROAS</text>
+                  <path class="fig-arrow" d="M84 148 h11 M95 148 l-4 -4 M95 148 l-4 4" />
+
+                  <!-- shared time axis -->
+                  <path class="fig-axis" d="M46 180 H310" />
+                  <g class="fig-tick">
+                    <text x="46" y="196">T1</text>
+                    <text x="98" y="196">T2</text>
+                    <text x="151" y="196">T3</text>
+                    <text x="204" y="196">T4</text>
+                    <text x="257" y="196">T5</text>
+                    <text x="310" y="196">T6</text>
+                  </g>
+                </svg>
+                <span class="marks" aria-hidden="true">
+                  <i class="marks__c"></i><i class="marks__c"></i>
+                  <i class="marks__c"></i><i class="marks__c"></i>
+                </span>
+              </div>
+              <figcaption class="caption" data-type>
+                Fig. 01 — Spend / ROAS, T1-T6
+              </figcaption>
+            </figure>
+          </article>
+
+          <!-- ---------- CASE FILE Nº 02 ---------- -->
+          <article class="case case--b">
+            <figure class="case__fig">
+              <div class="plate plate--fig">
+                <svg
+                  class="fig"
+                  data-fig="02"
+                  viewBox="0 0 340 210"
+                  role="img"
+                  aria-labelledby="fig02-t fig02-d"
+                >
+                  <title id="fig02-t">Hình 02</title>
+                  <desc id="fig02-d">
+                    Sáu cột mọc dần từ mốc 0 phần trăm, kèm một đường thể hiện
+                    tỷ trọng TikTok đi lên. Đồ thị chỉ thể hiện hình dạng, chưa
+                    gắn số liệu.
+                  </desc>
+
+                  <g class="fig-bars">
+                    <rect class="fig-bar" x="50" y="156" width="26" height="14" />
+                    <rect class="fig-bar" x="92" y="144" width="26" height="26" />
+                    <rect class="fig-bar" x="134" y="126" width="26" height="44" />
+                    <rect class="fig-bar" x="176" y="108" width="26" height="62" />
+                    <rect class="fig-bar" x="218" y="82" width="26" height="88" />
+                    <rect class="fig-bar" x="260" y="54" width="26" height="116" />
+                  </g>
+
+                  <path
+                    class="fig-draw"
+                    d="M63 144 L105 132 L147 114 L189 96 L231 70 L273 42"
+                  />
+                  <g class="fig-dot">
+                    <circle cx="63" cy="144" r="2" />
+                    <circle cx="105" cy="132" r="2" />
+                    <circle cx="147" cy="114" r="2" />
+                    <circle cx="189" cy="96" r="2" />
+                    <circle cx="231" cy="70" r="2" />
+                    <circle cx="273" cy="42" r="2" />
+                  </g>
+
+                  <path class="fig-axis" d="M40 170 H300" />
+                  <text class="fig-tick fig-tick--zero" x="36" y="174">0%</text>
+
+                  <text class="fig-label" x="300" y="30" text-anchor="end">
+                    TIKTOK SHARE
+                  </text>
+                  <path class="fig-arrow" d="M307 30 l9 -9 M316 21 h-6 M316 21 v6" />
+
+                  <g class="fig-tick">
+                    <text x="63" y="188" text-anchor="middle">T1</text>
+                    <text x="105" y="188" text-anchor="middle">T2</text>
+                    <text x="147" y="188" text-anchor="middle">T3</text>
+                    <text x="189" y="188" text-anchor="middle">T4</text>
+                    <text x="231" y="188" text-anchor="middle">T5</text>
+                    <text x="273" y="188" text-anchor="middle">T6</text>
+                  </g>
+                </svg>
+                <span class="marks" aria-hidden="true">
+                  <i class="marks__c"></i><i class="marks__c"></i>
+                  <i class="marks__c"></i><i class="marks__c"></i>
+                </span>
+              </div>
+              <figcaption class="caption" data-type>
+                Fig. 02 — TikTok share, T1-T6
+              </figcaption>
+            </figure>
+
+            <div class="case__text">
+              <p class="case__slug">Case File Nº 02 — TikTok — Launch</p>
+              <!-- TODO: toàn bộ số liệu của hồ sơ 02. -->
+              <h3 class="case__title">Mở kênh TikTok từ con số 0</h3>
+              <dl class="case__body">
+                <dt>Bối cảnh</dt>
+                <dd>
+                  Doanh nghiệp chưa từng chạy TikTok, toàn bộ doanh số phụ thuộc
+                  Meta.
+                </dd>
+                <dt>Cách làm</dt>
+                <dd>
+                  Xây pipeline content-performance, test
+                  <span class="tbd"
+                    ><span class="sr-only">chưa công bố</span></span
+                  >
+                  mẫu creative/tháng, quy trình cắt-lỗ 48 giờ.
+                </dd>
+                <dt>Kết quả</dt>
+                <dd>
+                  TikTok chiếm
+                  <span class="tbd"
+                    ><span class="sr-only">chưa công bố</span></span
+                  >% doanh số sau
+                  <span class="tbd"
+                    ><span class="sr-only">chưa công bố</span></span
+                  >
+                  tháng.
+                </dd>
+              </dl>
+            </div>
+          </article>
+
+          <!-- ---------- CASE FILE Nº 03 ---------- -->
+          <article class="case case--c">
+            <div class="case__head">
+              <p class="case__slug">Case File Nº 03 — Data — Realtime</p>
+              <!-- TODO: toàn bộ số liệu của hồ sơ 03. -->
+              <h3 class="case__title">Hệ thống dashboard thay báo cáo tay</h3>
+            </div>
+
+            <dl class="case__body case__body--split">
+              <div>
+                <dt>Bối cảnh</dt>
+                <dd>
+                  Báo cáo thủ công chậm 1-2 ngày, quyết định ngân sách luôn trễ
+                  nhịp.
+                </dd>
+              </div>
+              <div>
+                <dt>Cách làm</dt>
+                <dd>
+                  Chuẩn hóa tracking, gom dữ liệu đa kênh về một dashboard
+                  realtime.
+                </dd>
+              </div>
+              <div>
+                <dt>Kết quả</dt>
+                <dd>
+                  Thời gian ra quyết định từ
+                  <span class="tbd"
+                    ><span class="sr-only">chưa công bố</span></span
+                  >
+                  ngày còn
+                  <span class="tbd"
+                    ><span class="sr-only">chưa công bố</span></span
+                  >
+                  giờ.
+                </dd>
+              </div>
+            </dl>
+
+            <figure class="case__fig case__fig--wide">
+              <div class="plate plate--fig">
+                <svg
+                  class="fig"
+                  data-fig="03"
+                  viewBox="0 0 420 210"
+                  role="img"
+                  aria-labelledby="fig03-t fig03-d"
+                >
+                  <title id="fig03-t">Hình 03</title>
+                  <desc id="fig03-d">
+                    Phác thảo bố cục một dashboard realtime: thanh tiêu đề có
+                    nhãn LIVE theo giờ GMT+7, bên dưới là bốn ô, ba ô sparkline
+                    và một ô biểu đồ vòng cung. Bản vẽ bố cục, chưa gắn số liệu.
+                  </desc>
+
+                  <rect class="fig-frame" x="20" y="18" width="380" height="168" />
+                  <path class="fig-hair" d="M20 44 H400" />
+
+                  <circle class="fig-live" cx="34" cy="31" r="3.5" />
+                  <text class="fig-label" x="46" y="35">LIVE · GMT+7</text>
+
+                  <!-- panel 1 -->
+                  <g class="fig-panel">
+                    <rect class="fig-cell" x="32" y="56" width="172" height="55" />
+                    <path class="fig-hair" d="M42 68 h44" />
+                    <path
+                      class="fig-draw fig-spark"
+                      d="M42 100 L64 92 L86 96 L108 84 L130 88 L152 76 L174 80 L194 70"
+                    />
+                  </g>
+
+                  <!-- panel 2 -->
+                  <g class="fig-panel">
+                    <rect class="fig-cell" x="216" y="56" width="172" height="55" />
+                    <path class="fig-hair" d="M226 68 h34" />
+                    <path
+                      class="fig-draw fig-spark"
+                      d="M226 96 L248 98 L270 88 L292 90 L314 78 L336 82 L358 72 L378 74"
+                    />
+                  </g>
+
+                  <!-- panel 3 -->
+                  <g class="fig-panel">
+                    <rect class="fig-cell" x="32" y="119" width="172" height="55" />
+                    <path class="fig-hair" d="M42 131 h52" />
+                    <path
+                      class="fig-draw fig-spark"
+                      d="M42 162 L64 156 L86 158 L108 148 L130 152 L152 142 L174 138 L194 132"
+                    />
+                  </g>
+
+                  <!-- panel 4: arc -->
+                  <g class="fig-panel">
+                    <rect class="fig-cell" x="216" y="119" width="172" height="55" />
+                    <path class="fig-hair" d="M226 131 h40" />
+                    <circle class="fig-ring" cx="302" cy="150" r="19" />
+                    <path
+                      class="fig-draw fig-arc"
+                      d="M302 131 A19 19 0 1 1 285.5 159.5"
+                    />
+                  </g>
+                </svg>
+                <span class="marks" aria-hidden="true">
+                  <i class="marks__c"></i><i class="marks__c"></i>
+                  <i class="marks__c"></i><i class="marks__c"></i>
+                </span>
+              </div>
+              <figcaption class="caption" data-type>
+                Fig. 03 — Dashboard realtime, bố cục
+              </figcaption>
+            </figure>
+          </article>
+        </div>
+
+        <span class="folio">005</span>
+      </section>
+
+      <!-- ===================================================================
+           SPREAD 8 — PULL QUOTE (ink)
+      ==================================================================== -->
+      <section
+        id="quote"
+        class="spread spread--quote surface-ink"
+        aria-label="Trích dẫn"
+      >
+        <div class="spread__ink" aria-hidden="true"></div>
+
+        <div class="spread__body quote__body">
+          <figure class="quote">
+            <span class="quote__mark" aria-hidden="true">“</span>
+            <blockquote class="quote__text">
+              <span class="quote__line" data-ink-reveal>Chạy ads thì dễ.</span>
+              <span class="quote__line" data-ink-reveal
+                >Chạy <em class="it gold">có lãi</em> ở quy mô 15 tỷ mỗi
+                tháng —</span
+              >
+              <span class="quote__line" data-ink-reveal
+                >đó mới là <em class="it gold">nghề</em>.</span
+              >
+            </blockquote>
+            <figcaption class="quote__by" data-type>Nguyễn Minh Điền</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           SPREAD 9 — BACK COVER / CONTACT (006)
+      ==================================================================== -->
+      <section id="contact" class="spread spread--back" aria-labelledby="contact-h">
+        <header class="runhead">
+          <span class="runhead__issue">The Performance Issue · № 01</span>
+          <span class="runhead__section">Contact</span>
+        </header>
+
+        <div class="spread__body">
+          <div class="grid">
+            <div class="opener">
+              <span class="rule" data-rule-draw aria-hidden="true">
+                <i class="rule__line"></i><i class="rule__line"></i>
+              </span>
+              <h2 id="contact-h" class="back__head" lang="en" data-ink-reveal>
+                Let’s talk <em class="it gold">numbers</em>.
+              </h2>
+            </div>
+
+            <div class="back__lead">
+              <p>
+                Đang tìm một performance leader chứng minh được bằng số liệu?
+                Tôi sẵn sàng cho buổi trao đổi thẳng thắn — mang theo dashboard
+                thật.
+              </p>
+            </div>
+
+            <div class="back__contact">
+              <!-- TODO: thay bằng email cá nhân chính thức. -->
+              <a class="email" href="mailto:oad@ngocdung.com">
+                <span class="email__text">oad@ngocdung.com</span>
+                <i class="email__rule" aria-hidden="true"></i>
+                <span class="email__cta">Gửi email</span>
+              </a>
+
+              <dl class="back__links">
+                <div>
+                  <dt>LinkedIn</dt>
+                  <!-- TODO: bổ sung đường dẫn LinkedIn. -->
+                  <dd>
+                    <span class="tbd tbd--wide"
+                      ><span class="sr-only">chưa công bố</span></span
+                    >
+                  </dd>
+                </div>
+                <div>
+                  <dt>Zalo</dt>
+                  <!-- TODO: bổ sung số/đường dẫn Zalo. -->
+                  <dd>
+                    <span class="tbd tbd--wide"
+                      ><span class="sr-only">chưa công bố</span></span
+                    >
+                  </dd>
+                </div>
+              </dl>
+            </div>
+
+            <div class="colophon">
+              <span class="rule" data-rule-draw aria-hidden="true">
+                <i class="rule__line"></i><i class="rule__line"></i>
+              </span>
+              <div class="colophon__cols">
+                <p>
+                  Typefaces — Fraunces · Be Vietnam Pro · IBM Plex Mono<br />
+                  Thiết kế &amp; vận hành số — Nguyễn Minh Điền
+                </p>
+                <p>
+                  © 2026 — The Performance Issue, № 01<br />
+                  HCMC — GMT+7
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <span class="folio">006</span>
+      </section>
+    </main>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

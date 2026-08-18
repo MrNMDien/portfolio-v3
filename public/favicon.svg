@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="MĐ — The Performance Issue">
+  <title>MĐ — The Performance Issue</title>
+
+  <!-- ink plate -->
+  <rect width="64" height="64" fill="#1A1713"/>
+
+  <!-- gold keyline: the frame of a printed stamp -->
+  <rect x="4.5" y="4.5" width="55" height="55" fill="none" stroke="#A98136" stroke-width="1"/>
+
+  <!-- corner registration ticks -->
+  <g stroke="#A98136" stroke-width="1" opacity=".85">
+    <path d="M4.5 12.5v-8h8"/>
+    <path d="M59.5 12.5v-8h-8"/>
+    <path d="M4.5 51.5v8h8"/>
+    <path d="M59.5 51.5v8h-8"/>
+  </g>
+
+  <!-- monogram: M Đ set as a serif ligature on paper -->
+  <text x="32" y="41.5"
+        text-anchor="middle"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-size="27"
+        font-weight="500"
+        letter-spacing="-0.5"
+        fill="#F7F3EA">MĐ</text>
+
+  <!-- double rule beneath the monogram -->
+  <path d="M17 47.5h30" stroke="#A98136" stroke-width="1"/>
+  <path d="M17 50.5h30" stroke="#A98136" stroke-width="1" opacity=".55"/>
+</svg>
